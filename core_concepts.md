@@ -167,7 +167,7 @@ kubectl get pods -o wide
 </p>
 </details>
 
-### List a particular deployment
+### List a particular deployment (my-deployment)
 
 <details><summary>show</summary>
 <p>
@@ -188,10 +188,14 @@ kubectl get deployment my-deployment
 kubectl get pods
 ```
 
+
+```bash
+kubectl get pods -n default
+```
 </p>
 </details>
 
-### Get pod's YAML
+### Get the yaml from the pod named "nginx"
 
 <details><summary>show</summary>
 <p>
@@ -227,17 +231,6 @@ kubectl logs nginx
 </p>
 </details>
 
-### Output a pod's YAML without cluster specific information
-
-<details><summary>show</summary>
-<p>
-
-```bash
-kubectl get pod my-pod -o yaml --export
-```
-
-</p>
-</details>
 
 ### List all nodes in the cluster
 
@@ -289,7 +282,7 @@ kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=="ExternalIP
 </p>
 </details>
 
-### Create a new namespace
+### Create a new namespace named web
 
 <details><summary>show</summary>
 <p>
@@ -313,7 +306,7 @@ kubectl get namespaces
 </p>
 </details>
 
-### Create a pod which runs an nginx container
+### Create a pod which runs an nginx container named nginx
 
 <details><summary>show</summary>
 <p>
@@ -321,13 +314,13 @@ kubectl get namespaces
 ```bash
 kubectl run nginx --image=nginx
 # or
-kubectl run nginx2 --image=nginx --restart=Never --dry-run -o yaml | kubectl create -f -
+kubectl run nginx --image=nginx --restart=Never --dry-run -o yaml | kubectl create -f -
 ```
 
 </p>
 </details>
 
-### Delete a pod
+### Delete the pod named nginx
 
 <details><summary>show</summary>
 <p>
