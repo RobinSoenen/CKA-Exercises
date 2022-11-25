@@ -47,11 +47,15 @@ KUBECONFIG=~/.kube/config:~/.kube/kubconfig2
 </p>
 </details>
 
-### Create a role the will allow users to get, watch, and list pods and container logs
+### Create a role (pod-reader) the will allow users to get, watch, and list pods and container logs
 
 <details><summary>show</summary>
 <p>
 
+```bash
+kubectl create role pod-reader --verb=get,list,watch --resource=pods,pods/log
+```
+  
 ```bash
 # create a file named role.yml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -71,11 +75,15 @@ kubectl apply -f role.yml
 </p>
 </details>
 
-### Create a role binding that binds to a role named pod-reader, applies to a user named `dev`
+### Create a role binding (pod-reader-binding) that binds to a role named pod-reader, applies to a user named `dev`
 
 <details><summary>show</summary>
 <p>
 
+```bash
+ kubectl create rolebinding pod-reader-binding --clusterrole=podreader --user=dev
+```
+  
 ```bash
 # create a file named role-binding.yml
 apiVersion: rbac.authorization.k8s.io/v1
@@ -98,7 +106,7 @@ roleRef:
 
 ### 
 
-### Permanently save the namespace for all subsequent kubectl commands in that context.
+### Permanently save the namespace (ggckad-s2) for all subsequent kubectl commands in that context.
 
 <details><summary>show</summary>
 <p>
@@ -110,7 +118,7 @@ kubectl config set-context --current --namespace=ggckad-s2
 </p>
 </details>
 
-### Set a context utilizing a specific username and namespace
+### Set a context utilizing a specific username (cluster-admin) and namespace (foo)
 
 <details><summary>show</summary>
 <p>
@@ -195,7 +203,7 @@ kubectl get po nginx -o yaml
 </p>
 </details>
 
-### Get information about the pod, including details about potential issues (e.g. pod hasn't started)
+### Get information about the pod (nginx), including details about potential issues (e.g. pod hasn't started)
 
 <details><summary>show</summary>
 <p>
@@ -207,7 +215,7 @@ kubectl describe po nginx
 </p>
 </details>
 
-### Get pod logs
+### Get the logs for the pod named nginx
 
 <details><summary>show</summary>
 <p>
@@ -263,7 +271,7 @@ kubectl describe nodes
 <p>
 
 ```bash
-kubectl get services --sort.by=.metadata.name
+kubectl get services --sort-by=.metadata.name
 ```
 
 </p>
